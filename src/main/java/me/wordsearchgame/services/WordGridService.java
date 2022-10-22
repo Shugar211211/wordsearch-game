@@ -44,8 +44,8 @@ public class WordGridService {
 			}
 		}
 		
-		Collections.shuffle(coordinates);
 		for(String word : words) {
+			Collections.shuffle(coordinates);
 			for(Coordinate coordinate : coordinates) {
 				int line = coordinate.line;
 				int row = coordinate.row;
@@ -144,49 +144,57 @@ public class WordGridService {
 			case HORIZONTAL_FORWARD :
 				if(coordinate.row + wordLength > gridSize) return false;
 				for(int wordCharPos = 0; wordCharPos <wordLength; wordCharPos++) {
-					if(contents[coordinate.line][coordinate.row + wordCharPos] != '_') return false;
+					char placeInGrid = contents[coordinate.line][coordinate.row + wordCharPos];
+					if(placeInGrid != '_' && placeInGrid !=word.charAt(wordCharPos)) return false;
 				}
 				break;
 			case HORIZONTAL_BACKWARD :
 				if(coordinate.row < wordLength) return false;
 				for(int wordCharPos = 0; wordCharPos <wordLength; wordCharPos++) {
-					if(contents[coordinate.line][coordinate.row - wordCharPos] != '_') return false;
+					char placeInGrid = contents[coordinate.line][coordinate.row - wordCharPos];
+					if(placeInGrid != '_' && placeInGrid !=word.charAt(wordCharPos)) return false;
 				}
 				break;
 			case VERTICAL_DOWN :
 				if(coordinate.line + wordLength > gridSize) return false;
 				for(int wordCharPos = 0; wordCharPos <wordLength; wordCharPos++) {
-					if(contents[coordinate.line + wordCharPos][coordinate.row] != '_') return false;
+					char placeInGrid = contents[coordinate.line + wordCharPos][coordinate.row];
+					if(placeInGrid != '_' && placeInGrid !=word.charAt(wordCharPos)) return false;
 				}
 				break;
 			case VERTICAL_UP :
 				if(coordinate.line < wordLength) return false;
 				for(int wordCharPos = 0; wordCharPos <wordLength; wordCharPos++) {
-					if(contents[coordinate.line - wordCharPos][coordinate.row] != '_') return false;
+					char placeInGrid = contents[coordinate.line - wordCharPos][coordinate.row];
+					if(placeInGrid  != '_' && placeInGrid !=word.charAt(wordCharPos)) return false;
 				}
 				break;
 			case DIAGONAL_FORWARD_DOWN :
 				if(coordinate.row + wordLength > gridSize || coordinate.line + wordLength > gridSize) return false;
 				for(int wordCharPos = 0; wordCharPos <wordLength; wordCharPos++) {
-					if(contents[coordinate.line + wordCharPos][coordinate.row + wordCharPos] != '_') return false;
+					char placeInGrid = contents[coordinate.line + wordCharPos][coordinate.row + wordCharPos];
+					if(placeInGrid  != '_' && placeInGrid !=word.charAt(wordCharPos)) return false;
 				}
 				break;
 			case DIAGONAL_BACKWARD_UP :
 				if(coordinate.row < wordLength || coordinate.line < wordLength) return false;
 				for(int wordCharPos = 0; wordCharPos <wordLength; wordCharPos++) {
-					if(contents[coordinate.line - wordCharPos][coordinate.row - wordCharPos] != '_') return false;
+					char placeInGrid = contents[coordinate.line - wordCharPos][coordinate.row - wordCharPos];
+					if(placeInGrid != '_' && placeInGrid !=word.charAt(wordCharPos)) return false;
 				}
 				break;
 			case DIAGONAL_FORWARD_UP :
 				if(coordinate.row + wordLength > gridSize || coordinate.line < wordLength) return false;
 				for(int wordCharPos = 0; wordCharPos <wordLength; wordCharPos++) {
-					if(contents[coordinate.line - wordCharPos][coordinate.row + wordCharPos] != '_') return false;
+					char placeInGrid = contents[coordinate.line - wordCharPos][coordinate.row + wordCharPos];
+					if(placeInGrid  != '_' && placeInGrid !=word.charAt(wordCharPos)) return false;
 				}
 				break;
 			case DIAGONAL_BACKWARD_DOWN :
 				if(coordinate.row < wordLength || coordinate.line + wordLength > gridSize) return false;
 				for(int wordCharPos = 0; wordCharPos <wordLength; wordCharPos++) {
-					if(contents[coordinate.line + wordCharPos][coordinate.row - wordCharPos] != '_') return false;
+					char placeInGrid = contents[coordinate.line + wordCharPos][coordinate.row - wordCharPos];
+					if(placeInGrid  != '_' && placeInGrid !=word.charAt(wordCharPos)) return false;
 				}
 				break;
 		}
